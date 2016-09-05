@@ -428,3 +428,8 @@ extensions += ['sphinx.ext.jsmath']
 
 # jsMath のパスを設定する (_static/ からの相対パス)
 jsmath_path = 'jsMath-3.6e/easy/load.js'
+
+# LaTeX の docclass 設定
+latex_docclass = {'manual': 'jsbook'}
+
+pdf_use_toc = False

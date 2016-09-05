@@ -1,0 +1,28 @@
+
+Welcome to AISECjp's documentation!
+***********************************
+
+Contents:
+
+* AISECjp（Artificial Intelligence x Security） #5 議事録
+
+  * 開催情報
+
+  * 1. 勉強会概要
+
+  * 2. LT： 通信ログ ダッシュボードの試作
+
+  * 3. 輪読：「ITエンジニアのための機械学習入門」　第３章　最尤推定
+    法
+
+  * 4. 追加LT: AI技術動向の調査結果について
+
+
+Indices and tables
+******************
+
+* 索引
+
+* モジュール索引
+
+* 検索ページ
