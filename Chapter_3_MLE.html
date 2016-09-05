@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>第3章 最尤推定法 Maximum Likelihood Estimation &mdash; AISECjp 2016-07-31 ドキュメント</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016-07-31',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/jsMath-3.6e/easy/load.js"></script>
+    <link rel="top" title="AISECjp 2016-07-31 ドキュメント" href="index.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="maximum-likelihood-estimation">
+<h1>第3章　最尤推定法　Maximum Likelihood Estimation<a class="headerlink" href="#maximum-likelihood-estimation" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<ul class="simple">
+<li>日時： 2016年08月24日（水） 19:30～21:00</li>
+<li>場所： マネーフォワード株式会社</li>
+<li>発表者： 藤井 一郎</li>
+<li>内容: 最尤推定法を用いた回帰分析</li>
+</ul>
+<div class="section" id="id1">
+<h2>3.1 確率モデルの利用<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><p>最尤推定法：　あるデータが得られる確率が最大となるようなパラメータを推定</p>
+<blockquote>
+<div><p>（1） パラメータを含むモデル（数式）を設定する</p>
+<p>（2） パラメータを評価する基準を定める</p>
+<p>（3） 最良の評価を与えるパラメータを決定する</p>
+</div></blockquote>
+</div></blockquote>
+<div class="section" id="id2">
+<h3>3.1.1 「データ発生確率」の設定<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<p><strong>パラメータを含むモデル（数式）を設定する：</strong></p>
+<blockquote>
+<div><p>(1)データの背後にはM次多項式の関係があり、さらに標準偏差 <span class="math">\sigma</span> の誤差が含まれている</p>
+<blockquote>
+<div><div class="math">
+\begin{split}\it{f}(x) &amp;= w_0 + w_1 x + w_2 x^2 + \cdots + w_M x^M \\
+      &amp;= \sum_{m=0}^M w_m x^m\end{split}</div>
+</div></blockquote>
+<p>(2)観測点　<span class="math">x_n</span> における観測値 <span class="math">t</span> は、<span class="math">f(x_n)</span> を中心としておよそ <span class="math">f(x_n) \pm \sigma</span> の範囲に散らばる</p>
+<blockquote>
+<div><p>(平均 <span class="math">f(x_n)</span>、分散 <span class="math">\sigma</span> の正規分布)</p>
+<div class="math">
+\it{N} ( t | f(x_n), \sigma^2 ) = \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{1}{2 \sigma^2}(t - f(x_n))^2}</div>
+</div></blockquote>
+<p>この２つの式の <span class="math">w_m</span> と <span class="math">\sigma</span> とを推定する。</p>
+<p>最小二乗法との違い：データに含まれる誤差を合わせて推定する</p>
+<img alt="_images/AISECjp20160824-fig1.png" src="_images/AISECjp20160824-fig1.png" />
+</div></blockquote>
+</div>
+<div class="section" id="id3">
+<h3>3.1.2 尤度関数によるパラメーターの評価<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p><strong>パラメータを評価する基準を定める</strong></p>
+<p>評価方法　=　<em>尤度関数</em>：　トレーニングセットに含まれるデータ <span class="math">\left \{(x_n,t_n) \right \}^N_{n=1}</span> が得られる確率 (パラメータは <span class="math">w_m</span> と <span class="math">\sigma</span> )</p>
+<div class="math">
+\begin{split}P &amp;= N(t_1| f(x_1),\sigma^2) \times \cdots \times N(t_N| f(x_N),\sigma^2) \\
+  &amp;= \prod_{n=1}^{N} N(t_n| f(x_n),\sigma^2)\end{split}</div>
+<p>「最尤推定法」</p>
+<blockquote>
+<div><ul class="simple">
+<li>「観測されたデータ（トレーニングセット）は、最も発生確率が高いデータに違いない」との仮説</li>
+<li>確率Pが最大になるようなパラーメータを推定</li>
+<li>尤度関数の最大値問題</li>
+</ul>
+</div></blockquote>
+<div class="math">
+\begin{split}P &amp;= \prod_{n=1}^{N} \frac{1}{\sqrt{2 \pi \sigma^2}} e^{- \frac{1}{2 \sigma^2}(t_n - f(x_n))^2} \\
+  &amp;= \left (\frac{1}{2 \pi \sigma^2} \right )^{\frac{N}{2}} Exp \left [- \frac{1}{2 \sigma^2} \sum_{n=1}^{N} \{t_n - f(x_n)\}^2 \right ]\end{split}</div>
+<p>ここで　自乗誤差 <span class="math">E_p = \frac{1}{2} \sum_{n=1}^{N} \{ f(x_n) - t_n\}^2 \}</span></p>
+<div class="math">
+P = (\frac{1}{2 \pi \sigma^2})^{\frac{N}{2}} e^{- \frac{1}{\sigma^2} E_p}</div>
+<p>ここで　<span class="math">\beta = \frac{1}{\sigma^2}</span> とし、 <span class="math">E_p</span> とパラメータ <span class="math">w</span> の依存関係を明示</p>
+<div class="math">
+P(\beta,w) = (\frac{\beta}{2 \pi})^{\frac{N}{2}} e^{- \beta E_p(w)}</div>
+<p>これを最大にするパラメータ <span class="math">(\beta,w)</span> を求める。</p>
+<p>この尤度関数 <a class="footnote-reference" href="#id5" id="id4">[1]</a> は単調増加関数なので対数をとっても単調増加する。（対数尤度関数）</p>
+<table class="docutils footnote" frame="void" id="id5" rules="none">
+<colgroup><col class="label" /><col /></colgroup>
+<tbody valign="top">
+<tr><td class="label"><a class="fn-backref" href="#id4">[1]</a></td><td>勉強会終了後懇親会で尤度関数は単調増加ではないのでは？との質問があったが、尤度関数は指数関数なので単調増加関数。</td></tr>
+</tbody>
+</table>
+<div class="math">
+ln P(\beta,w) = \frac{N}{2}ln \beta - \frac{N}{2} ln 2 \pi - \beta E_p(w)</div>
+<p>対数尤度関数を最大化する条件：</p>
+<div class="math">
+\begin{split}\frac{\partial (ln P)}{\partial w_m} &amp;= 0  \qquad       (m = 0, \cdots, M) \\
+\frac{\partial (ln P)}{\partial \beta} &amp;= 0\end{split}</div>
+</div></blockquote>
+<dl class="docutils">
+<dt>　　　<span class="math">w_m</span> について：</dt>
+<dd><div class="first math">
+\frac{\partial E_p}{\partial w_m} = 0 \qquad (m =0, \cdots,M)</div>
+<p>これは自乗誤差を最小にする条件と同じ：</p>
+<p>多項式の係数 <span class="math">\{w_m\}_{m=0}^{M}</span>　は最小二乗法と同じ</p>
+<div class="last math">
+\begin{split}\sum_{n=1}^{N} \left ( \sum_{m'=0}^{M} w_{m'} x_n^{m'} -t_n \right ) x_n^m = 0 \\\end{split}</div>
+<div class="math">\sum_{m'=0}^{M} w_{m'} \sum_{n=1}^{N} x_n^{m'} x_{n}^{m} - \sum_{n=1}^{N} t_n x_n^m = 0</div>
+<div class="math">\begin{split}
+\Phi = \left ( \begin{array}{llll}
+         x_1^0 &amp; x_1^1 &amp; \cdots &amp; x_1^M \\
+         x_2^0 &amp; x_2^1 &amp; \cdots &amp; x_2^M \\
+         \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+          x_N^0 &amp; x_N^1 &amp; \cdots &amp; x_N^M \\
+          \end{array} \right )\end{split}</div>
+<div class="math">w^{\mathrm{T}} \Phi^{\mathrm{T}} \Phi - t^{\mathrm{T}} \Phi = 0</div>
+<div class="math">w = (\Phi^{\mathrm{T}} \Phi)^{-1} \Phi^{\mathrm{T}} t</div>
+</dd>
+</dl>
+<p>　　　<span class="math">\beta</span> について：</p>
+<blockquote>
+<div><div class="math">
+\frac{1}{\beta} = \frac{2 E_p}{N}</div>
+<div class="math">\begin{split}\sigma &amp;= \sqrt{\frac{1}{\beta}} = \sqrt{\frac{2 E_p}{N}} = E_{RMS} \\
+       &amp;= \sqrt{\frac{1}{N} \sum_{n=1}^{N} \left ( \sum_{m=0}^{M} w_m x_n^m -t_n \right )^2 }\end{split}</div>
+<p>これは最小二乗法の平方根平均自乗誤差</p>
+<p><strong>最小二乗法とは異なるアプローチで計算したが、得られた多項式は同じ</strong></p>
+<p><strong>最小二乗法は最尤推定法の中でも正規分布の誤差を仮定した特別な場合</strong></p>
+</div></blockquote>
+</div>
+<div class="section" id="id6">
+<h3>3.1.3 サンプルコードによる確認<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p>計算結果：</p>
+<dl class="docutils">
+<dt>(1)N=10での結果</dt>
+<dd><img alt="_images/figure_3.png" class="first" src="_images/figure_3.png" />
+<p>対数尤度の変化を見ることでオーバーフィッティングを調べることができる</p>
+<img alt="_images/figure_4.png" class="last" src="_images/figure_4.png" />
+</dd>
+<dt>(2)N=100での結果</dt>
+<dd><img alt="_images/figure_1.png" class="first" src="_images/figure_1.png" />
+<img alt="_images/figure_2.png" class="last" src="_images/figure_2.png" />
+</dd>
+</dl>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="id7">
+<h2>3.2 単純化した例による解説<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><p>3.1節では複数の観測点における観測値の予測を行った。
+この節では、ある観測点に固定して、繰り返し観測値を取得したデータから平均 <span class="math">\mu</span> 、標準偏差 <span class="math">\sigma</span> を最尤推定法で推定してみる。</p>
+<div class="math">
+\begin{split}\mu &amp;= \frac{1}{N} \sum_{n=1}^{N} t_n   \qquad (標本平均） \\
+\sigma^2 &amp;= \frac{1}{N} \sum_{n=1}^{N} ( t_n - \mu)^2　　\qquad (標本分散）\end{split}</div>
+<img alt="_images/figure_2.png" src="_images/figure_2.png" />
+<p>推定値（標本分散）は実際の値（母分散）よりも小さくなる傾向がある。（偏りがある）</p>
+<p>偏りをなくすために推定値より大きくしてやる（不偏推定量）</p>
+<blockquote>
+<div><div class="math">
+\sigma^2 = \frac{1}{N-1} \sum_{n=1}^{N} ( t_n - \mu)^2　　\qquad (不偏分散）</div>
+</div></blockquote>
+<p>なぜ、 <span class="math">N</span> ではなく <span class="math">N-1</span> で割るか？</p>
+<p>計算式の中に標本平均が含まれているので、 <span class="math">(N-1)</span> 個の観測データがあれば他のひとつの観測データは正確に値が決められる状態になる。（自由度が　<span class="math">N-1</span>)</p>
+<p>(厳密な証明は割愛)</p>
+</div></blockquote>
+</div>
+<div class="section" id="url">
+<h2>参考URL：<a class="headerlink" href="#url" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<blockquote>
+<div><ul class="simple">
+<li>人工知能に関する断創録　最尤推定、MAP推定、ベイズ推定 <a class="reference external" href="http://cp.the-premium.jp/">http://cp.the-premium.jp/</a></li>
+<li>最尤法によるパラメータ推定の意味と具体例 | 高校数学の美しい物語 <a class="reference external" href="http://mathtrain.jp/mle">http://mathtrain.jp/mle</a></li>
+<li>（おまけ） イラストでわかる自由度と不偏分散 <a class="reference external" href="http://home.a02.itscom.net/coffee/tako08Annex2.html">http://home.a02.itscom.net/coffee/tako08Annex2.html</a></li>
+</ul>
+</div></blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">第3章　最尤推定法　Maximum Likelihood Estimation</a><ul>
+<li><a class="reference internal" href="#id1">3.1 確率モデルの利用</a><ul>
+<li><a class="reference internal" href="#id2">3.1.1 「データ発生確率」の設定</a></li>
+<li><a class="reference internal" href="#id3">3.1.2 尤度関数によるパラメーターの評価</a></li>
+<li><a class="reference internal" href="#id6">3.1.3 サンプルコードによる確認</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id7">3.2 単純化した例による解説</a></li>
+<li><a class="reference internal" href="#url">参考URL：</a></li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/Chapter_3_MLE.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Ichiro Fujii.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/Chapter_3_MLE.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

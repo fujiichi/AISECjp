@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="ja">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>AISECjp（Artificial Intelligence x Security） #5 議事録 &mdash; AISECjp 2016-07-31 ドキュメント</title>
+    
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '2016-07-31',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/translations.js"></script>
+    <script type="text/javascript" src="_static/jsMath-3.6e/easy/load.js"></script>
+    <link rel="top" title="AISECjp 2016-07-31 ドキュメント" href="index.html" />
+    <link rel="prev" title="第3章 最尤推定法 Maximum Likelihood Estimation" href="Chapter_3_MLE.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="aisecjp-artificial-intelligence-x-security-5">
+<h1>AISECjp（Artificial Intelligence x Security） #5 議事録<a class="headerlink" href="#aisecjp-artificial-intelligence-x-security-5" title="このヘッドラインへのパーマリンク">¶</a></h1>
+<div class="section" id="id1">
+<h2>開催情報<a class="headerlink" href="#id1" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<ul class="simple">
+<li>エンジニアのエンジニアによるエンジニアのための機械学習勉強会</li>
+<li>日時：2016年8月24日　19:30～21:30</li>
+<li>場所：マネーフォワード株式会社</li>
+</ul>
+</div>
+<div class="section" id="id2">
+<h2>1. 勉強会概要<a class="headerlink" href="#id2" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<p>　* 機械学習を各自の専門分野の実務で活用することを目的に，まずは基礎理論の解説本の輪読を行う。
+　* 各自の取り組み状況についてのLTもあり。
+　* 開催間隔：月１回</p>
+</div>
+<div class="section" id="lt">
+<h2>2. LT： 通信ログ ダッシュボードの試作<a class="headerlink" href="#lt" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id3">
+<h3>発表者:<a class="headerlink" href="#id3" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><ul class="simple">
+<li>Suzuki Kengo氏</li>
+<li>マネーフォワード㈱</li>
+<li>セキュリティエンジニア（防御側）</li>
+<li>本勉強会の発起人の１人</li>
+</ul>
+</div></blockquote>
+</div>
+<div class="section" id="id4">
+<h3>内容：<a class="headerlink" href="#id4" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p>通信ログを可視化，異常検知した結果を表示するダッシュボードの試作を始めた。</p>
+<p>オープンソースのgrayLogを利用。（Suplunkは高くて実用には難あるため）</p>
+<blockquote>
+<div><ul class="simple">
+<li><a class="reference external" href="https://www.graylog.org/">https://www.graylog.org/</a></li>
+<li>データ蓄積・分析のバックエンドはmongoDB+ElasticSearchが使われている。</li>
+<li>ElasticSearchの可視化によく使われているKibanaよりはシンプルで使いやすそう。（Kibanaは使ったことはないが）</li>
+<li>各種ログ形式を標準装備，マーケットプレイスから追加のログ形式や追加機能プラグインを取り込むことも可</li>
+<li>全ての機能が無償で利用できる。サポートが必要な場合はサブスクリプション契約。</li>
+</ul>
+</div></blockquote>
+<p>構築中のシステムの現状はアラート出まくりのオオカミ少年状態。実用化には適切なアラートに以下に絞り込むかが課題。</p>
+</div></blockquote>
+</div>
+<div class="section" id="id5">
+<h3>ディスカッション：<a class="headerlink" href="#id5" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><ol class="arabic simple">
+<li>機器によって形式・内容が異なる等ログのみの解析には限界あるので，最近のトレンドはパケット解析に移っている。ただし，膨大な量のバイナリデータを解析する必要あるので人では実質不可能。AI的手法を活用すべき分野の一つ。</li>
+<li>ParoAltoでは異常検知されなかったがパケット解析により判明した社内インシデント事例の紹介あり。</li>
+<li>grayLogは日本ではまだほとんど知られていないツール。ユーザ会もない。先駆者になれるかも。</li>
+</ol>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="it-3">
+<h2>3. 輪読：「ITエンジニアのための機械学習入門」　第３章　最尤推定法<a class="headerlink" href="#it-3" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id6">
+<h3>発表者<a class="headerlink" href="#id6" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<dl class="docutils">
+<dt>　* Fujii Ichiro</dt>
+<dd><ul class="first last simple">
+<li>㈱IHIエスキューブ</li>
+<li>重工メーカの社内業務システムの開発・運用を経て現在は技術企画を担当</li>
+</ul>
+</dd>
+</dl>
+</div>
+<div class="section" id="id7">
+<h3>内容：<a class="headerlink" href="#id7" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p>本書における機械学習のステップは以下で説明されている。</p>
+<p>(1)パラメータを含むモデル（数式）の設定
+(2)パラメータを評価する評価基準の設定
+(3)最良の評価を与えるパラメータの決定</p>
+<p>最尤推定法を使った回帰分析としては以下の手順となる。</p>
+<p>(1)N次多項式のモデルを設定。パラメータは多項式の係数と，データに含まれる標準偏差
+データは正規分布に従うと仮定</p>
+<p>(2)評価基準は尤度関数（データの出現確率の掛け合わせたもの）</p>
+<p>(3)尤度関数を最大化する条件：対数尤度関数を多項式係数および標準偏差の偏微分が０</p>
+<blockquote>
+<div><ul class="simple">
+<li>得られる結果の多項式は，最小二乗法で得られる結果と同一。（データが正規分布に従うと仮定したため。）</li>
+<li>最小二乗法は最尤推定法の特殊ケースともいえる。</li>
+<li>最尤推定法をさらに拡張したのがベイズ推定法（第８章で解説）</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+<div class="section" id="id8">
+<h3>ディスカッション：<a class="headerlink" href="#id8" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p>(1)この手法はどんな分野に応用できるのか？うまいたとえ話があれば。</p>
+<blockquote>
+<div><ul class="simple">
+<li>最尤推定法ではないが，ベイズ推定法は迷惑メールフィルタ，WAF等で実用されている。</li>
+</ul>
+</div></blockquote>
+<p>(2)電子部品メーカので外観検査への機械学習応用を検討している。自分はソフトウェアエンジニアだが数式に立ち入った理解が必要か，それともツールとして使えればよいのか？</p>
+<blockquote>
+<div><ul class="simple">
+<li>ツールが出そろっているのでまずは使ってみるというアプローチもあり。ただし，データ活用のためには一般的には，①業務知識，②数学・統計理論，③ソフトウェアエンジニアリングの３要素が必要。すべてをまかなえる人はいないのでチームで取り組むのがよい。</li>
+<li>外観検査ではデータ取る部分でどうしても人手がかかかってしまう。（角度を変えて見てみる等） 将来的には検査対象をロボットアームが動かすような仕組みも必要かもしれない。</li>
+</ul>
+</div></blockquote>
+<p>(3)モデルを３次元グラフで可視化したのが分かりやすかった。どんなツールを使ったのか？</p>
+<blockquote>
+<div><ul class="simple">
+<li>Mathematicaという数式処理ソフトを使用。</li>
+<li><a class="reference external" href="https://www.wolfram.com/mathematica/index.ja.html?footer=lang">https://www.wolfram.com/mathematica/index.ja.html?footer=lang</a></li>
+<li>数式とプロット範囲を与えればコマンド１行でグラフが描ける（プログラム不要）。</li>
+<li>買えば１本数十万のソフトだが，なぜか5000円で買えるRasberryPiにバンドルされている。</li>
+<li>私はこのためにRasberryPiを買った。</li>
+</ul>
+</div></blockquote>
+</div></blockquote>
+</div>
+</div>
+<div class="section" id="lt-ai">
+<h2>4. 追加LT: AI技術動向の調査結果について<a class="headerlink" href="#lt-ai" title="このヘッドラインへのパーマリンク">¶</a></h2>
+<div class="section" id="id9">
+<h3>発表者：<a class="headerlink" href="#id9" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div>総合ITベンダー K2(&#64;bonjinjpn)（フォレンジック技術者）</div></blockquote>
+</div>
+<div class="section" id="id10">
+<h3>内容＆ディスカッション：<a class="headerlink" href="#id10" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div><p>社内の勉強会用に公開情報をまとめたAI技術動向の調査結果についてLT。</p>
+<p>機械学習を実務で使うためには，対象の実務知識，数学・統計の知識，プログラミング能力＋英語力が必要ですべてを分かるスーパーマンはいない。そこで社内でチームとして取り組めるように勉強会を始めた。</p>
+<p>(1)情報処理学会コンピュータセキュリティ研究会の論文における機械学習関連の論文数は2014年から急増している。</p>
+<p>(2)学会のスポンサー枠を見るとどんな企業がその分野に力を入れているのかが分かる。
+例えばCVPR, ECCVやICCVなどの国際学会ではパナソニックやDisney Researchがスポンサー枠を持っている。</p>
+<blockquote>
+<div><p>※参考URL</p>
+<p><a class="reference external" href="http://www.eccv2016.org/sponsors/">http://www.eccv2016.org/sponsors/</a></p>
+<p><a class="reference external" href="http://pamitc.org/iccv15/">http://pamitc.org/iccv15/</a></p>
+<p><a class="reference external" href="http://cvpr2016.thecvf.com/">http://cvpr2016.thecvf.com/</a></p>
+</div></blockquote>
+<p>(3)現在第3次AIブームと言われているが少々過熱気味，また冬の時代が訪れるかも。
+ただし，これまでとの違いはGPU（ハード）とオープンソースのツール（ソフト）を使って個人が趣味で実績上げているので意外と長続きする可能性も。</p>
+<p>(4)人狼知能プロジェクト　AIによる自動文章生成　それなりに意味のある文章が生成できるようになっている。</p>
+<p>(5)ROBORACE　自動運転によるフォーミュラーカーレース</p>
+<blockquote>
+<div><p>※参考URL</p>
+<p><a class="reference external" href="http://www.roborace.com/">http://www.roborace.com/</a></p>
+</div></blockquote>
+<p>(6)現在AIの応用分野は画像認識分野が多いが，AIで実績出ているのはごく一部の領域。まだまだ取り組むべき領域あり。（たとえば，3次元画像復元等）</p>
+</div></blockquote>
+</div>
+<div class="section" id="id11">
+<h3>5． まとめ<a class="headerlink" href="#id11" title="このヘッドラインへのパーマリンク">¶</a></h3>
+<blockquote>
+<div>今回，初参加のメンバーがほとんどだったが参加者同士のディスカッションが活発に行えて大変有意義だった。</div></blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">目次</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">AISECjp（Artificial Intelligence x Security） #5 議事録</a><ul>
+<li><a class="reference internal" href="#id1">開催情報</a></li>
+<li><a class="reference internal" href="#id2">1. 勉強会概要</a></li>
+<li><a class="reference internal" href="#lt">2. LT： 通信ログ ダッシュボードの試作</a><ul>
+<li><a class="reference internal" href="#id3">発表者:</a></li>
+<li><a class="reference internal" href="#id4">内容：</a></li>
+<li><a class="reference internal" href="#id5">ディスカッション：</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#it-3">3. 輪読：「ITエンジニアのための機械学習入門」　第３章　最尤推定法</a><ul>
+<li><a class="reference internal" href="#id6">発表者</a></li>
+<li><a class="reference internal" href="#id7">内容：</a></li>
+<li><a class="reference internal" href="#id8">ディスカッション：</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#lt-ai">4. 追加LT: AI技術動向の調査結果について</a><ul>
+<li><a class="reference internal" href="#id9">発表者：</a></li>
+<li><a class="reference internal" href="#id10">内容＆ディスカッション：</a></li>
+<li><a class="reference internal" href="#id11">5． まとめ</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="Chapter_3_MLE.html" title="前の章へ">第3章　最尤推定法　Maximum Likelihood Estimation</a></li>
+  </ul></li>
+</ul>
+</div>
+  <div role="note" aria-label="source link">
+    <h3>このページ</h3>
+    <ul class="this-page-menu">
+      <li><a href="_sources/minute-05-20160824.txt"
+            rel="nofollow">ソースコードを表示</a></li>
+    </ul>
+   </div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>クイック検索</h3>
+    <form class="search" action="search.html" method="get">
+      <div><input type="text" name="q" /></div>
+      <div><input type="submit" value="検索" /></div>
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Ichiro Fujii.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4.5</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.9</a>
+      
+      |
+      <a href="_sources/minute-05-20160824.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>
