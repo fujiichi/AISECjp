@@ -1,4 +1,4 @@
-This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.sjis) (TeX Live 2016/W32TeX) (preloaded format=platex 2016.8.29)  5 SEP 2016 22:30
+This is e-pTeX, Version 3.14159265-p3.7-160201-2.6 (utf8.sjis) (TeX Live 2016/W32TeX) (preloaded format=platex 2016.8.29)  21 SEP 2016 00:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -819,7 +819,7 @@ File: figure_3.png Graphic file (type bmp)
 <figure_3.png>
 File: figure_3.png Graphic file (type bmp)
  <figure_3.png>
-Overfull \hbox (57.3934pt too wide) in paragraph at lines 306--308
+Overfull \hbox (57.3934pt too wide) in paragraph at lines 309--311
 [][] 
  []
 
@@ -832,7 +832,7 @@ File: figure_1.png Graphic file (type bmp)
  <figure_1.png>
 File: figure_1.png Graphic file (type bmp)
  <figure_1.png>
-Overfull \hbox (62.95334pt too wide) in paragraph at lines 313--315
+Overfull \hbox (62.95334pt too wide) in paragraph at lines 316--318
 [][] 
  []
 
@@ -851,27 +851,27 @@ File: figure_2.png Graphic file (type bmp)
 
 ]
 No file AISECjp.ind.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 611.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 617.
 [19]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 611.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 617.
  (./AISECjp.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 611.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 611.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 617.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 617.
 Package rerunfilecheck Info: File `AISECjp.out' has not changed.
 (rerunfilecheck)             Checksum: 18892A95628470DA06AAFDA487B75873;936.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 611.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 617.
  ) 
 Here is how much of TeX's memory you used:
  9001 strings out of 493683
  125627 string characters out of 6152647
- 234418 words of memory out of 5000000
+ 235418 words of memory out of 5000000
  12361 multiletter control sequences out of 15000+600000
  55196 words of font info for 116 fonts, out of 8000000 for 9000
  935 hyphenation exceptions out of 8191
  36i,22n,45p,286b,442s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on AISECjp.dvi (23 pages, 44336 bytes).
+Output written on AISECjp.dvi (23 pages, 45536 bytes).
